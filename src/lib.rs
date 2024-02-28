@@ -29,14 +29,14 @@ impl ToDo {
 
 impl ToDoList {
     pub fn new() -> ToDoList {
-        let mut todo_list =  ToDoList {
+        let mut todo_list = ToDoList {
             todo_list: Vec::new(),
         };
 
         todo_list.add(ToDo {
             id: 1,
             title: String::from("Default task"),
-            status: ToDoStatus::New
+            status: ToDoStatus::New,
         });
 
         return todo_list;
@@ -77,12 +77,17 @@ impl ToDoList {
     }
 
     pub fn display(&self) {
-        println!("==================");
+        if self.todo_list.is_empty() {
+            println!("==================");
+            println!("The are no tasks");
+            println!("==================\n");
+            return;
+        }
 
+        println!("==================");
         for item in self.todo_list.iter() {
             println!("{} - {}: {:?}", item.id, item.title, item.status);
         }
-
         println!("==================\n");
     }
 }
